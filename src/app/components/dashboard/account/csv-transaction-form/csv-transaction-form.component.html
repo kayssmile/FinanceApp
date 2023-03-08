@@ -1,0 +1,159 @@
+<section class="modal subcategory-modal" #subcategoryModal>
+  <div class="modal-background"></div>
+  <div class="is-flex is-justify-content-space-between">
+    <form class="categoryHotForm form" (submit)="submitCategoryForm($event)">
+      <input type="text" #subcategoryInput class="input is-small">
+      <input type="hidden" #categoryInput>
+    </form>
+    <button class="button is-small" (click)="hideSubcategoryModal($event)">
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+    </button>
+  </div>
+</section>
+
+<section #modal class="modal" id="csv-transaction-form">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">New csv-upload on {{account?.name}}</p>
+      <button class="delete" aria-label="close" (click)="hideModal()"></button>
+    </header>
+
+    <article class="modal-card-body">
+      <div #accountIsReady class="is-hidden">
+        <div class="columns mb-0">
+          <div class="column has-text-centered">
+            <div #csvInputControl class="control">
+              <p>csvMask used here: {{activeCsvMask?.name}}: {{activeCsvMask?.mask}}</p><br>
+              <textarea #csvInput class="textarea" placeholder="paste csv here" (input)="computeCsvData($event)"></textarea>
+              <p #invalidInfo class="is-hidden"><br>No valid transactions found. Do you have the right csv/date-Mask?</p>
+            </div>
+          </div>
+        </div>
+
+        <div #categoryColumns class="is-hidden">
+          <p class="subtitle is-size-4 has-text-weight-medium" *ngIf="categoryGroups.length > 1">Choose Category for Transaction</p>
+          <small #csvInfo></small>
+          <table class="table active-transaction is-fullwidth" *ngIf="!doneCategorizing && transactionsToCategorize.length">
+            <tbody>
+              <tr>
+                <td>{{transactionsToCategorize[activeTransactionIndex].date}}</td>
+                <td>{{transactionsToCategorize[activeTransactionIndex].description}}</td>
+                <td>{{getCategoryName(transactionsToCategorize[activeTransactionIndex])}}</td>
+                <td>{{transactionsToCategorize[activeTransactionIndex].amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="columns is-flex-wrap-wrap">
+            <ng-container *ngFor="let categoryGroup of categoryGroups">
+              <div class="column is-3" *ngIf="categoryGroup.categories === true">
+                <div class="box" [ngClass]="{
+                  'is-light': categoryGroup.color === '#EAF2E3',
+                  'is-blue': categoryGroup.color === '#61E8E1',
+                  'is-red': categoryGroup.color === '#F25757',
+                  'is-yellow': categoryGroup.color === '#F2E863',
+                  'is-orange': categoryGroup.color === '#F2CD60'}"
+                  >
+                  <p class="is-flex is-justify-content-space-between">
+                    <strong class="pb-3">{{categoryGroup.name}}</strong>
+                    <span class="tag addItem" (click)="addCategory(categoryGroup)">+</span>
+                  </p>
+                  <div class="field is-grouped is-grouped-multiline">
+                    <ng-container *ngFor="let category of categories">
+                      <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                        <span class="tag selectable-tag"
+                        #tags
+                        (click)="setCategoryForActiveTransaction(category, $event)">
+                          {{category.name}}
+                        </span>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="column is-3" *ngIf="accounts.length > 1">
+              <div class="box">
+                <p class="is-flex is-justify-content-space-between">
+                  <strong class="pb-3">Transfer from/to</strong>
+                </p>
+                <div class="field is-grouped is-grouped-multiline">
+                  <ng-container *ngFor="let acc of accounts" >
+                    <div class="control" *ngIf="acc !== account ">
+                      <span class="tag selectable-tag"
+                      (click)="setTransferCategoryForActiveTransaction(acc, $event)"
+                      #tags>
+                        {{acc.name}}
+                      </span>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="is-flex is-justify-content-space-between">
+            <button class="button mt-5 mb-5 mr-1 is-120px btn-modifier" (click)="deleteTransaction()">
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+              <span>
+                Delete
+              </span>
+            </button>
+            <button class="button mt-5 mb-5 ml-1 is-120px btn-modifier"
+            (click)="setTransaction()"
+            [disabled]="!setCategory">
+              <span>
+                Next
+              </span>
+              <span class="icon is-small">
+                <i class="fas fa-arrow-right"></i>
+              </span>
+            </button>
+          </div>
+
+          <div>
+            <p class="subtitle is-size-4 has-text-weight-medium">Transaction overview</p>
+            <p class="">Total {{transactionsToCategorize.length}} Transactions</p>
+          </div>
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr><th>Date</th><th>Description/Info</th><th>Category</th><th>Amount</th></tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let transaction of transactionsToCategorize; let i = index"
+                [ngClass]="{
+                  'is-incoming': i > activeTransactionIndex,
+                  'is-current': i === activeTransactionIndex,
+                  'is-done': i < activeTransactionIndex
+                }"
+              >
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{getCategoryName(transaction)}}</td>
+                <td>{{transaction.amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div #accountNotReady class="has-text-centered">
+        <p>{{account?.name}} has no csv-Mask set! Update it on the <a href="/configuration">configuration</a>.</p>
+      </div>
+
+    </article>
+    <footer class="modal-card-foot is-flex is-justify-content-center">
+      <button class="button is-success" *ngIf="doneCategorizing" (click)="saveTransactionsToAccount()">Save</button>
+      <button #csvReset class="button is-hidden" type="button" (click)="resetForm()">Reset</button>
+      <button class="button" (click)="hideModal()">Cancel</button>
+    </footer>
+  </div>
+</section>

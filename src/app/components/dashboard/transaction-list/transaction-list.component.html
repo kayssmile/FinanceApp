@@ -1,0 +1,69 @@
+<article class="card mt-5" [ngClass]="{
+  'display-none': no_transactions
+  }">
+  <header class="card-header">
+    <p class="card-header-title is-responsive-24px">
+      Transactions
+    </p>
+  </header>
+  <div class="card-content height">
+    <ng-container *ngFor="let month of activeMonths">
+      <h4 class="title is-4 has-text-centered table-title is-responsive-22px">{{month}}</h4>
+      <table class="table is-fullwidth transaction-table">
+        <colgroup class="is-widescreen">
+          <col class="col-account" />
+          <col class="col-date" />
+          <col class="col-description" />
+          <col class="col-category" />
+          <col class="col-amount" />
+        </colgroup>
+        <tbody>
+          <ng-container *ngFor="let transaction of allTransactions">
+            <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
+              <tr class="col-date-short">
+                <td>
+                  <span class="tag">{{transaction.accountShortName}}</span>
+                </td>
+                <td>{{transaction.date}}</td>
+              </tr>
+              <tr class="col-category">
+                <td class="has-text-left">
+                  {{categoryNameFor(transaction)}}
+                  <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
+                </td>
+              </tr>
+              <tr class="col-description">
+                <td>{{transaction.description}}</td>
+              </tr>
+              <tr class="col-amount">
+                <td class="has-text-right">
+                  <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
+                    <b>{{transaction.amount | number: '1.2-2'}}</b>
+                  </span>
+                </td>
+              </tr>
+            </div>
+            <tr class="is-transaction is-widescreen" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
+              <td>
+                <span class="tag">{{transaction.accountShortName}}</span>
+              </td>
+              <td>{{transaction.date}}</td>
+              <td>{{transaction.description}}</td>
+              <td class="has-text-right">
+                {{categoryNameFor(transaction)}}
+                <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
+              </td>
+              <td class="has-text-right">
+                <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
+                  <b>{{transaction.amount | number: '1.2-2'}}</b>
+                </span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</article>
+
+<app-transaction-form #DetailTransactionModal [transaction]="selectedtransaction" [categoryGroups]="allCategoryGroups" [categories]="allCategories"></app-transaction-form>

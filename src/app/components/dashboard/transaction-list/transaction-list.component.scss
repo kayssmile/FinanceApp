@@ -1,0 +1,74 @@
+@import "src/styles/variables.scss";
+
+table.table {
+  background: unset;
+
+  td {
+    border: none;
+  }
+}
+
+table.transaction-table {
+  width: 100%;
+  table-layout: fixed;
+  .is-mobile {
+    display: none;
+  }
+  .col-account, .col-amount {
+    width: 10%;
+  }
+  .col-date {
+    width: 15%;
+  }
+  .col-category {
+    width: 15%;
+  }
+}
+
+.height{
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.is-20px{
+  width: 20px;
+}
+
+.is-transaction{
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: none;
+}
+
+@media (max-width: $tablet){
+  table.transaction-table {
+    .is-widescreen{
+      display: none;
+    }
+    .is-mobile {
+      display: block;
+    }
+    tr{
+      display: block;
+      width: 100%;
+    }
+    td{
+      display: inline-block;
+      width: 100%;
+    }
+    tr.col-date-short {
+      width: 100%;
+      td {
+        width: 50%;
+      }
+    }
+    tr.col-category, tr.col-description {
+      width: 100%;
+      td {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,201 @@
+<section class="section">
+
+  <article class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        General Information
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content is-responsive-20px">
+        <p>
+          Happy to have you here! <br>
+          The "Finance App" should provide you with possibilities to manage your expenses, categorize transactions and to keep a steady eye on your accounts.
+        </p>
+        <p>
+          Use this for yourself, your family, your "WG" or whatever. There is no precondition and you could use the app without even having a bank account but it is best when the following criteria is met:
+        </p>
+        <ul>
+          <li>
+            <strong>1 to 8 Account(s)</strong> - these will be bank accounts usually but also could be your piggybank, kitchen drawer or any virtual assets you transfer money to/from.
+          </li>
+          <li>
+            <strong>Transactions as csv-Export</strong> - most banks will provide you with all transactions as csv-file. You won't have to enter any information when using the import.
+          </li>
+          <li>
+            <strong>Meaningful Categories</strong> for your Transactions. In a household it could be "Food", "Utilities", "Mobility" etc.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="columns">
+    <div class="column is-8">
+      <div class="card mt-5">
+        <header class="card-header">
+          <p class="card-header-title">
+            Setup Accounts (+ csv Options)
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <p>
+              To add your account(s), head over to <a routerLink="/configuration">configuration</a> add a new one. Use a recognizeable name and shortname (used in lists and where space is tight), select a color and add a short description if you want. <br>
+            </p>
+            <p>
+              Set the "Initial Amount" to the balance of your account at the time of your first transaction - if you want to enter the data for 2023, set the "Initial Amount" to the balance at 31. Dec 2022. <em>(if you later on decide to enter more data from the past, you can change the value accordingly and the current balance will be recalculated)</em>
+            </p>
+            <br>
+            <h6 class="title is-6">csv Masks</h6>
+            <p>
+              To correctly match the csv-data, have an export from your bank ready and create a new "CsvMask".
+            </p>
+            <p>
+              Give it a name (of your bank) and then examine a line from your csv-export. You are looking for three values: <strong>date, description/info</strong> and the <strong>transaction amount</strong>. <br>
+              Using the delimiter of your export (mostly ";", sometimes ",") enter a mask to define at wich positions these values are in the export of your bank.
+            </p>
+            <p>
+              <em>Example:</em><br>
+              <code>
+                16.09.2022;"BARGELDBEZUG VOM 16.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-80;16.09.2022;9280.23
+              </code><br>
+              This actual line from a PostFinance export uses ";" as delimiter. It has the date at the first position and the description at the second. The transaction amount is on the fourth position if negative and on the third if positive. The csv-mask to be entered would look like this: <br>
+              <code>
+                date;info;amount;amount;(unused);(unused)
+              </code><br>
+              Note that the two mentions of "amount" are not neccessary on any bank. You can also skip everything after the last used position, so the mask would behave the same if it looks like this: <br>
+              <code>
+                date;info;amount;amount
+              </code>
+            </p>
+            <p>
+              Now select that csv-mask on the created account and save.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <article class="card mt-5">
+        <header class="card-header">
+          <p class="card-header-title">
+            Setup Categories in Groups
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <p>
+              The main goal here is to categorize your Transactions. To do so, create the categories needed on the <a routerLink="/configuration">configuration page</a>.
+            </p>
+            <p>
+              Here is an example of Groups and Categories:
+            </p>
+            <ul>
+              <li>
+                <strong>Household</strong><br>
+                <ul>
+                  <li>Groceries</li>
+                  <li>Food on the go</li>
+                  <li>Utilities</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Health</strong>
+                <ul>
+                  <li>Health Insurance</li>
+                  <li>Doctor</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Tax + Bills</strong>
+                <ul>
+                  <li>Internet</li>
+                  <li>Phone</li>
+                </ul>
+              </li>
+              <li>... you'll get it</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </article>
+
+  <article class="card mt-5">
+    <header class="card-header">
+      <p class="card-header-title">
+        Transactions
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content is-responsive-20px">
+        <p>
+          Now you are ready to categorize Transactions from a csv-export or create them manually from the dashboard on each account.
+        </p>
+        <p>
+          When pasting the csv-data it gets parsed and is presented line-by-line for you to categorize. See the selected category in the list of transactions and advance to the next, either by clicking "Next" or by setting the switch to "auto-advance". That way you'll only have to click once per transaction.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="card mt-5">
+    <header class="card-header">
+      <p class="card-header-title">
+        Demo csv-data
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content is-responsive-20px">
+        <p>Use this data for a demo on an Account with the "PostFinance" csv-mask (date;info;amount;amount;)</p>
+        <pre>
+Datum von:;="01.09.2022"
+Datum bis:;="30.09.2022"
+Buchungsart:;="Alle Buchungen"
+Konto:;="CH1234567890123456"
+Währung:;="CHF"
+
+Buchungsdatum;Avisierungstext;Gutschrift in CHF;Lastschrift in CHF;Valuta;Saldo in CHF
+30.09.2022;"KAUF/DIENSTLEISTUNG VOM 30.09.2022 KARTEN NR. XXXX9809 COOP-1243 SCHWANDEN SCHWANDEN SCHWEIZ ";;-88.6;30.09.2022;8755.27
+29.09.2022;"TWINT GELD EMPFANGEN VOM 29.09.2022 VON TELEFON-NR. +417XXXXXXXX AN TELEFON-NR. +417XXXXXX";18;;29.09.2022;8843.87
+29.09.2022;"TWINT KAUF/DIENSTLEISTUNG VOM 29.09.2022 VON TELEFON-NR. +41797849593 JUSTEAT ZURICH ";;-36.05;29.09.2022;
+29.09.2022;"LASTSCHRIFT CREDIT SUISSE (SCHWEIZ) AG PARADEPLATZ 8 8070 ZÜRICH CH4231000167777581000 DIGITEC GALAXUS AG 8005 ZÜRICH SENDER REFERENZ: 20220928000800503002985 ";;-11.9;29.09.2022;
+28.09.2022;"LASTSCHRIFT DAUERAUFTRAG: 90-9741458 CH7309000000928576728 BAIER, DONAT SIMON ";;-111;28.09.2022;8873.82
+28.09.2022;"LASTSCHRIFT DAUERAUFTRAG: 90-6508831 UBS SWITZERLAND AG BURGSTRASSE 1 8750 GLARUS CH1200284284203026M1G FABIO ROTZER BUNDESSTRASSE 17 6003 LUZERN ";;-100;28.09.2022;
+27.09.2022;"KAUF/DIENSTLEISTUNG VOM 27.09.2022 KARTEN NR. XXXX9809 MIGROS GLARUS GLARUS SCHWEIZ ";;-5.9;27.09.2022;9084.82
+26.09.2022;"KAUF/DIENSTLEISTUNG VOM 26.09.2022 KARTEN NR. XXXX9809 COOP-1229 GLARUS GLARUS SCHWEIZ ";;-14.65;26.09.2022;9115.72
+26.09.2022;"KAUF/DIENSTLEISTUNG VOM 26.09.2022 KARTEN NR. XXXX9809 COOP-1229 GLARUS GLARUS SCHWEIZ ";;-9.4;26.09.2022;
+21.09.2022;"KAUF/DIENSTLEISTUNG VOM 20.09.2022 KARTEN NR. XXXX9809 ALDI GLARUS 80 GLARUS SCHWEIZ ";;-7.6;20.09.2022;9139.77
+20.09.2022;"BARGELDBEZUG VOM 20.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-100;20.09.2022;9147.37
+17.09.2022;"KAUF/ONLINE-SHOPPING VOM 17.09.2022 KARTEN NR. XXXX9809 EAT.CH GMBH HTTPS://WWW.TAKEAWAY.COM/CH PAYMENT ID 6888452337 BESTELLNUMMER PFE888E0BE ";;-32.86;17.09.2022;9247.37
+16.09.2022;"BARGELDBEZUG VOM 16.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-80;16.09.2022;9280.23
+15.09.2022;"BARGELDBEZUG VOM 15.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-100;15.09.2022;9360.23
+14.09.2022;"KAUF/DIENSTLEISTUNG VOM 14.09.2022 KARTEN NR. XXXX9809 COOP-1229 GLARUS GLARUS SCHWEIZ ";;-0.95;14.09.2022;9460.23
+14.09.2022;"TWINT KAUF/DIENSTLEISTUNG VOM 14.09.2022 VON TELEFON-NR. +41797849593 DUSKI IMBISS GLARUS ";;-13;14.09.2022;
+13.09.2022;"LASTSCHRIFT UBS SWITZERLAND AG BAHNHOFSTRASSE 45 8098 ZÜRICH CH923000520210955901V BYJUNO AG INDUSTRIESTRASSE 13C 6300  ZUG SENDER REFERENZ: 20220912000800224829619 ";;-8.7;13.09.2022;9474.18
+12.09.2022;"KAUF/DIENSTLEISTUNG VOM 12.09.2022 KARTEN NR. XXXX9809 MIGROS GLARUS GLARUS SCHWEIZ ";;-29.1;12.09.2022;9482.88
+11.09.2022;"KAUF/DIENSTLEISTUNG VOM 11.09.2022 KARTEN NR. XXXX9809 MIGROLINO GLARUS GLARUS SCHWEIZ ";;-10;11.09.2022;9511.98
+09.09.2022;"KAUF/DIENSTLEISTUNG VOM 09.09.2022 KARTEN NR. XXXX9809 MIGROS GLARUS GLARUS SCHWEIZ ";;-87.8;09.09.2022;9521.98
+09.09.2022;"BARGELDBEZUG VOM 08.09.2022 KARTEN NR. XXXX9809 CS GLARUS 1 N/A SCHWEIZ ";;-200;08.09.2022;
+09.09.2022;"PREIS FÜR BARGELDBEZUG AM BANCOMAT IM INLAND VOM 08.09.2022 KARTEN NR. XXXX9809 CS GLARUS 1 N/A SCHWEIZ ";;-2;09.09.2022;
+07.09.2022;"KAUF/DIENSTLEISTUNG VOM 07.09.2022 KARTEN NR. XXXX9809 COOP-1229 GLARUS GLARUS SCHWEIZ ";;-4.95;07.09.2022;9811.78
+05.09.2022;"KAUF/DIENSTLEISTUNG VOM 05.09.2022 KARTEN NR. XXXX9809 KKIOSK 257.79 GLARUS SCHWEIZ ";;-30;05.09.2022;9816.73
+05.09.2022;"KAUF/DIENSTLEISTUNG VOM 05.09.2022 KARTEN NR. XXXX9809 MIGROS GLARUS GLARUS SCHWEIZ ";;-63.35;05.09.2022;
+05.09.2022;"KAUF/DIENSTLEISTUNG VOM 05.09.2022 KARTEN NR. XXXX9809 COOP-1229 GLARUS GLARUS SCHWEIZ ";;-12.35;05.09.2022;
+05.09.2022;"BARGELDBEZUG VOM 04.09.2022 KARTEN NR. XXXX9809 GLKB LINTHAL N/A SCHWEIZ ";;-40;04.09.2022;
+05.09.2022;"PREIS FÜR BARGELDBEZUG AM BANCOMAT IM INLAND VOM 04.09.2022 KARTEN NR. XXXX9809 GLKB LINTHAL N/A SCHWEIZ ";;-2;05.09.2022;
+04.09.2022;"KAUF/DIENSTLEISTUNG VOM 04.09.2022 KARTEN NR. XXXX9809 MIGROLINO GLARUS GLARUS SCHWEIZ ";;-10;04.09.2022;9964.43
+01.09.2022;"BARGELDBEZUG VOM 01.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-100;01.09.2022;10015.61
+01.09.2022;"KAUF/DIENSTLEISTUNG VOM 01.09.2022 VON TELEFON-NR. +41797849593 DUSKI IMBISS GLARUS ";;-13;01.09.2022;
+01.09.2022;"GUTSCHRIFT AUFTRAGGEBER: LEMONBRAIN GMBH BURGSTRASSE 1 8750 GLARUS MITTEILUNGEN: LOHN AUGUST";2515.9;;01.09.2022;
+
+Disclaimer:
+Dies ist kein durch PostFinance AG erstelltes Dokument. PostFinance AG ist nicht verantwortlich für den Inhalt.
+        </pre>
+      </div>
+    </div>
+  </article>
+
+</section>

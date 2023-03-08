@@ -1,0 +1,60 @@
+<section data-cy="AccountComponent">
+  <div class="is-flex is-justify-content-space-between heading">
+    <h4 class="title is-4">
+      Registered Accounts:
+    </h4>
+    <button class="button new-account no-decoration" type="button" (click)="createAccount()" *ngIf='data ==="data"'>+ Create new Account</button>
+  </div>
+
+  <article class="card mt-5" *ngIf='data ==="isloading"'>
+    <div class="has-text-centered">
+      <button class="button is-primary dark is-loading m-6">Loading</button>
+    </div>
+  </article>
+
+  <article class="card mt-5" *ngIf='data ==="nodata"'>
+    <div class="card-content">
+      <p class="title">Please create account to start</p>
+      <button class="button new-account no-decoration" type="button" (click)="createAccount()">+ Create new account</button>
+    </div>
+  </article>
+
+  <div class="columns is-flex-wrap-wrap account" *ngIf='data ==="data"'>
+    <div class="column is-one-third" *ngFor="let account of accounts">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-flex is-justify-content-space-between">
+            <span data-cy="account-name">
+              {{account.name}}
+            </span>
+            <span class="tag">
+              {{account.shortName}}
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <small>Description</small>
+            <p>{{account.description}}</p>
+            <small>Initial Amount</small>
+            <p class="is-flex is-justify-content-space-between">
+              Fr. {{account.initialValue}}
+            </p>
+            <small>Actual Amount</small>
+            <p class="is-flex is-justify-content-space-between">
+              <span class="title is-4">Fr. {{account.currentValue}}</span>
+            </p>
+            <small>Csv mask:</small>
+            <p>{{csvNameFor(account) || 'no csv mask selected'}}</p>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <button class="card-footer-item edit-account no-decoration is-responsive-20px" type="button" (click)="editAccount(account)">Edit</button>
+          <button class="card-footer-item no-decoration is-responsive-20px" type="button" (click)="deleteAccount(account)">Delete</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-account-form #accountModal [account]="accountForForm" [selector]="selector"></app-account-form>

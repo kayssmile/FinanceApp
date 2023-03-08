@@ -1,0 +1,57 @@
+.section {
+  position: absolute;
+  display: inline-block;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: black;
+//  background-image: url('../../../assets/money-ga2cf35a12_1920.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  h1 {
+    position: absolute;
+    font-size: 56px;
+    color: yellow;
+  }
+}
+
+
+button.button {
+  border: 1px black solid;
+}
+
+.button:focus, button:focus-visible {
+  outline: none;
+  border: 1px #dbdbdb solid;
+  box-shadow: none;
+}
+
+.button:hover {
+  background-color: rgb(144, 144, 144);
+}
+
+.login {
+  margin-left: 15%;
+  margin-top: 10%;
+}
+
+.intro {
+  margin-top: 25%;
+  font-size: 28px;
+  color: white;
+}
+
+button.register {
+  padding: 10px 30px;
+  font-size: 32px;
+  color: yellow;
+  background-color: black;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+button:hover {
+  color: black;
+  background-color: yellow;
+  border: none;
+}

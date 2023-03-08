@@ -1,0 +1,102 @@
+<section class="container is-widescreen section" *ngIf='loading_state ==="loaded"'>
+
+  <button class="button filter-toggle" #filterToggle (click)="toggleFilter($event)">
+    <span class="icon is-small">
+      <i class="fas fa-filter"></i>
+    </span>
+  </button>
+
+  <article class="dashboard-filter hidden border-modifier" #dashboardFilter id="dashboard-filter">
+    <div class="container is-widescreen my-5">
+      <p class="modal-card-title mb-5 is-inline-block margin-mobile">Dashboard Settings</p>
+      <button class="button is-pulled-right mr-4" (click)="toggleFilter($event)">
+        <span class="icon is-small">
+          <i class="fas fa-times"></i>
+        </span>
+      </button>
+      <table class="table is-narrow">
+        <tr>
+          <th class="has-text-right">Accounts:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+              <div class="control" *ngFor="let account of accounts">
+                <div class="tags has-addons account-select-tag" (click)="toggleAccount(account)">
+                  <span class="tag">{{account.name}}</span>
+                  <span class="tag">
+                    <span class="icon is-small">
+                      <i class="fas fa-check" *ngIf="activeAccounts.includes(account)"></i>
+                      <i class="fas fa-ban" *ngIf="!activeAccounts.includes(account)"></i>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="has-text-right">Timeframe:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+              <div class="tags has-addons timeframe-select-tag" (click)="toggleTimeframe()">
+                <span class="tag {{selectedTimeframe === 'years' ? 'selected' : ''}}">Years</span>
+                <span class="tag {{selectedTimeframe === 'months' ? 'selected' : ''}}">Months</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="has-text-right">Periods:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+              <ng-container *ngIf="selectedTimeframe === 'months'">
+                <div class="control" *ngFor="let group of groupedMonths">
+                  <div class="tags has-addons time-select-tag">
+                    <span class="tag"><strong>{{group.at(0).split('.').at(-1)}}</strong></span>
+                    <span
+                      *ngFor="let month of group"
+                      class="tag {{selectedTime.includes(month) ? 'selected' : 'inactive'}}"
+                      (click)="toggleMonth(month)"
+                    >
+                      {{month.split('.').at(0)}}
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="selectedTimeframe === 'years'">
+                <div class="control" *ngFor="let group of groupedMonths">
+                  <div class="tags has-addons time-select-tag" (click)="toggleYear(group.at(0).split('.').at(-1))">
+                    <span class="tag"><strong>{{group.at(0).split('.').at(-1)}}</strong></span>
+                    <span class="tag">
+                      <span class="icon is-small">
+                        <i class="fas fa-check" *ngIf="selectedTime.includes(group.at(0).split('.').at(-1))"></i>
+                        <i class="fas fa-ban" *ngIf="!selectedTime.includes(group.at(0).split('.').at(-1))"></i>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </article>
+
+  <app-account [activeAccounts]="activeAccounts"></app-account>
+  <app-graph [accounts]="activeAccounts" [selectedTimes]="selectedTime" [categoryGroups]="categoryGroups" [categories]="categories"></app-graph>
+  <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
+
+</section>
+
+<section class="section" *ngIf='loading_state === "nodata"'>
+  <article class="card mt-5">
+    <div class="card-content">
+      <p class="title">Accounts</p>
+      <p class="subtitle mt-3 mb-5">No registered Account go to <a href="/configuration">CONFIGURATION</a> to start</p>
+    </div>
+  </article>
+</section>
+
+<div class="has-text-centered" *ngIf='loading_state === "isloading"'>
+  <button class="button is-loading m-6">Loading</button>
+</div>

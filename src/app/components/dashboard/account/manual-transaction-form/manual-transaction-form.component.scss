@@ -1,0 +1,23 @@
+.selectable-tag {
+  cursor: pointer;
+  opacity: .6;
+  border: 1px solid transparent;
+
+  &.selected {
+    opacity: 1;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.modal-card {
+  width: 75vw;
+}
+
+.category-selects {
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

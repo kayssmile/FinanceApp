@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "financeapp-21731": {
+      "hosting": {
+        "FinanceApp": [
+          "financeapp-21731"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "financeapp-21731"
+  }
+}

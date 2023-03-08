@@ -1,0 +1,70 @@
+.input:focus, .input--select:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.is-success {
+  border-color: #48c78e !important;
+}
+
+.is-danger {
+  border-color: #f14668 !important;
+}
+
+.input:active {
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.input:focus {
+  border-color:#f14668;
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.select select:active {
+  border-color:#f14668;
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.select select:focus {
+  border-color:#f14668;
+  outline: 0;
+  box-shadow: none !important;
+}
+
+.muted {
+  opacity: .7;
+  filter: blur(3px);
+}
+
+.scrollable {
+  overflow-x: auto;
+  overflow-y: auto;
+  scroll-padding-bottom: 0;
+}
+
+.is-light {
+  border: 1px #EAF2E3 solid;
+}
+
+.is-blue {
+  border: 1px #61E8E1 solid;
+}
+
+.is-red {
+  border: 1px #F25757 solid;
+}
+
+.is-yellow {
+  border: 1px #F2E863 solid;
+}
+
+.is-orange {
+  border: 1px #F2CD60 solid;
+}
+
+.is-active {
+  border: 1px black solid;
+}

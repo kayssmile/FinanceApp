@@ -1,0 +1,188 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h1><i>FINANCE - CHECK</i></h1>
+        <p class="intro"><i>All your Accounts in one Overview, collect and categorise all your Transfers
+          and show them visually according to your preferences</i>
+        </p>
+        <button class="register mt-6" (click)="login_states = 'register'"><i>Register for free !</i></button>
+      </div>
+
+      <div class="column is-half login display-none" [ngClass]="{
+        'display-block': login_states === 'login'
+        }">
+        <form class="box has-text-centered"
+        [formGroup]="login"
+        (ngSubmit)="onSubmit()"
+        novalidate>
+          <h3 class="title">LOGIN</h3>
+          <div class="field">
+            <label class="label label_email">Email / Username</label>
+            <div class="control  has-icons-left has-icons-right">
+              <input class="input login_input" type="email"
+              data-cy="Email"
+              placeholder="Email"
+              [ngClass]="{
+                'is-danger': email.invalid && (email.dirty || email.touched),
+                'is-success': email.valid && (email.dirty || email.touched)
+              }"
+              formControlName="email"
+              #userName
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+              <small *ngIf="email.invalid" class="validation">Please provide a valid email address</small>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label label_password">Password</label>
+            <div class="control has-icons-left">
+              <input class="input login_input" type="password"
+              data-cy="Password"
+              placeholder="Password"
+              [ngClass]="{
+                'is-danger': password.invalid && (password.dirty || password.touched),
+                'is-success': password.valid && (password.dirty || password.touched)
+              }"
+              formControlName="password"
+              #userPassword
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+            <div *ngIf="(password.invalid && password.touched) || password.dirty">
+              <small *ngIf="password.invalid" class="validation">A minimum password length of 6 characters</small>
+            </div>
+          </div>
+          <div *ngIf="!authorisation">
+            <small class="validation">No valid email/password</small>
+          </div>
+          <button class="button is-fullwidth mt-5 has-text-black"
+          type="submit"
+          #signinButton
+          [disabled]="login.invalid">Login
+          </button>
+          <p class="mt-5" (click)="login_states = 'reset_pw'"><a><i>Forgot Password ?</i></a></p>
+        </form>
+      </div>
+
+      <div class="column is-half login display-none" [ngClass]="{
+        'display-block': login_states === 'register'
+        }">
+        <form class="box has-text-centered"
+        [formGroup]="register"
+        (ngSubmit)="regristration()"
+        novalidate>
+          <h3 class="title">Regristration</h3>
+          <div class="field">
+            <label class="label label_email">Email / Username</label>
+            <div class="control  has-icons-left has-icons-right">
+              <input class="input login_input" type="email"
+              placeholder="Email"
+              [ngClass]="{
+                'is-danger': email_register.invalid && (email_register.dirty || email_register.touched),
+                'is-success': email_register.valid && (email_register.dirty || email_register.touched)
+              }"
+              formControlName="email_register"
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <div *ngIf="(email_register.invalid && email_register.touched) || email_register.dirty">
+              <small *ngIf="email_register.invalid" class="validation">Please provide a valid email address</small>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label label_password">Password</label>
+            <div class="control has-icons-left">
+              <input class="input login_input" type="password"
+              placeholder="Password"
+              [ngClass]="{
+                'is-danger': password_register.invalid && (password_register.dirty || password_register.touched),
+                'is-success': password_register.valid && (password_register.dirty || password_register.touched)
+              }"
+              formControlName="password_register"
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+            <div *ngIf="(password_register.invalid && password_register.touched) || password_register.dirty">
+              <small *ngIf="password_register.invalid" class="validation">A minimum password length of 6 characters</small>
+            </div>
+          </div>
+          <div *ngIf="!authorisation">
+            <small class="validation">Upps something went wrong, please try it again</small>
+          </div>
+          <button class="button is-fullwidth mt-5 has-text-black"
+          type="submit"
+          #registerButton
+          [disabled]="register.invalid">Register for free
+          </button>
+          <p class="mt-5" (click)="login_states = 'login'"><a><i>Already have an account ?</i></a></p>
+        </form>
+      </div>
+
+      <div class="column is-half login display-none" [ngClass]="{
+        'display-block': login_states === 'reset_pw'
+        }">
+        <form class="box has-text-centered"
+        [formGroup]="reset_pw"
+        (ngSubmit)="resetPassword()"
+        novalidate>
+          <h3 class="title">Reset Password</h3>
+          <p class="mb-5 is-size-4 has-text-weight-medium">Provide a valid Email to change your Password</p>
+          <div class="field">
+            <label class="label label_email">Email</label>
+            <div class="control  has-icons-left has-icons-right">
+              <input class="input login_input" type="email"
+              placeholder="Email"
+              [ngClass]="{
+                'is-danger': reset_email.invalid && (reset_email.dirty || reset_email.touched),
+                'is-success': reset_email.valid && (reset_email.dirty || reset_email.touched)
+              }"
+              formControlName="reset_email"
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <div *ngIf="(reset_email.invalid && reset_email.touched) || reset_email.dirty">
+              <small *ngIf="reset_email.invalid" class="validation">Please provide a valid email address</small>
+            </div>
+          </div>
+          <div *ngIf="!authorisation">
+            <small class="validation">Upps something went wrong, please try it again</small>
+          </div>
+          <button class="button is-fullwidth mt-5 has-text-black"
+          type="submit"
+          #forgotButton
+          [disabled]="reset_pw.invalid">Reset Password
+          </button>
+          <p class="mt-5" (click)="login_states = 'login'"><a><i>Already have an account ?</i></a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="modal" #modal>
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Success !!!</p>
+      <button class="delete" aria-label="close" (click)="closeModal()"></button>
+    </header>
+    <article class="modal-card-body">
+      <p *ngIf="success == 'reset'">Link to set new password sent</p>
+      <p *ngIf="success == 'credentials'">Credentials created, login is ready</p>
+    </article>
+    <footer class="modal-card-foot"></footer>
+  </div>
+</section>

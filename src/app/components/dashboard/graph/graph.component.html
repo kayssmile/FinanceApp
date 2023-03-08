@@ -1,0 +1,12 @@
+<article class="card" (window:resize)="resizeGraphs()"
+[ngClass]="{
+  'display-none': no_transactions
+}">
+  <div class="card-content is-hidden-mobile">
+    <div class="inout mt-5" #inout></div>
+    <div class="categorized mt-5" #categorized></div>
+  </div>
+  <div class="card-content is-hidden-tablet">
+    <div class="inoutmobile" #inoutmobile></div>
+  </div>
+</article>

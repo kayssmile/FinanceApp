@@ -1,0 +1,41 @@
+<article class="columns mb-3 accounts-margin is-flex-wrap-wrap" *ngIf='accounts'>
+  <div class="column account" *ngFor="let account of accounts"
+  [ngClass]="{
+    'is-one-quarter': accounts_flag,
+    'muted': !activeAccounts.includes(account)
+  }">
+    <div class="card account-card" [ngStyle]="{'border-bottom-color': account.color}">
+      <header class="card-header">
+        <p class="card-header-title is-flex is-justify-content-space-between">
+          <span>
+            {{account.name}}
+          </span>
+          <span class="tag">
+            {{account.shortName}}
+          </span>
+        </p>
+      </header>
+      <div class="card-content is-flex-mobile is-justify-content-space-between">
+        <div class="content has-text-centered">
+          <p class="is-hidden-mobile">{{account.description}}</p>
+          <h4 class="title is-4 mb-0">Fr. {{account.currentValue}}</h4>
+        </div>
+        <div class="field is-grouped is-justify-content-center">
+          <button class="button is-small is-rounded mx-1 no-decoration" (click)="openManualTransactionModal(account)">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+          </button>
+          <button class="button is-small is-rounded mx-1 is-hidden-mobile" (click)="openCsvTransactionModal(account)">
+            <span class="icon is-small">
+              <i class="fas fa-upload"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<app-manual-transaction-form #manualTransactionModal [account]="selectedAccount"></app-manual-transaction-form>
+<app-csv-transaction-form #csvTransactionModal [account]="selectedAccount"></app-csv-transaction-form>

@@ -1,0 +1,93 @@
+<section class="section content home">
+  <h1 class="title is-1 has-text-centered mt-6">Welcome to your Financeapplication !</h1>
+  <p class="has-text-centered mt-6 mb-6 ml-1 mr-1">Hello and welcome back to your personal and individualised Finance Check, on the Dashboard you'll have all your <strong>Accounts and Finances</strong> provided</p>
+
+  <div class="columns is-flex is-flex-direction-column is-align-content-center mt-5">
+    <div class="column has-text-centered mt-5">
+      <button class="button has-sizes" routerLink="/dashboard">
+        Check your Dashboard
+      </button>
+    </div>
+    <div class="column has-text-centered">
+      <button class="button has-sizes" routerLink="/configuration">
+        Go to Configuration
+      </button>
+    </div>
+    <div class="column has-text-centered">
+      <button class="button no-decoration has-sizes" routerLink="/manual">
+        Manual
+      </button>
+    </div>
+    <div class="column has-text-centered">
+      <button class="button no-decoration has-sizes" (click)="change_Modal()">
+        Credential Settings
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="modal" #modal>
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Credentials</p>
+      <button class="delete" aria-label="close" (click)="change_Modal()"></button>
+    </header>
+
+    <article class="modal-card-body">
+      <div class="is-flex is-justify-content-space-around is-align-content-center" *ngIf="change_cred === 'select' ">
+        <button class="button has-sizes btn-modifier" (click)="credentials('email')">
+          Change Email
+        </button>
+        <button class="button has-sizes btn-modifier" (click)="credentials('password')">
+          Change Password
+        </button>
+      </div>
+      <form *ngIf="change_cred === 'password' " [formGroup]="password_verification">
+        <label class="label">Please enter password</label>
+        <input class="input" type="password"
+        placeholder="password"
+        formControlName="password"
+        required>
+        <div *ngIf="!authorisation">
+          <small class="validation">Upps something went wrong, please try it again</small>
+        </div>
+      </form>
+      <form *ngIf="change_cred === 'change_password' " [formGroup]="password_change">
+        <label class="label">Please enter new password</label>
+        <input class="input" type="password"
+        placeholder="password"
+        formControlName="new_password"
+        required>
+      </form>
+      <div class="is-flex is-justify-content-space-around is-align-content-center" *ngIf="change_cred === 'success' ">
+        <p class="">Password succesful changed</p>
+      </div>
+      <form *ngIf="change_cred === 'change_email' " [formGroup]="email_change">
+        <label class="label">Please enter new Email</label>
+        <input class="input" type="text"
+        placeholder="email"
+        formControlName="new_email"
+        required>
+      </form>
+      <div class="is-flex is-justify-content-space-around is-align-content-center" *ngIf="change_cred === 'successemail' ">
+        <p class="">Email succesful changed</p>
+      </div>
+    </article>
+
+    <footer class="modal-card-foot is-flex is-justify-content-center is-align-content-center">
+      <button class="button btn-modifier mr-5" [disabled]="password_change.invalid" *ngIf="change_cred === 'change_password'" (click)="set_change()">
+        Submit
+      </button>
+      <button class="button btn-modifier mr-5" [disabled]="email_change.invalid" *ngIf="change_cred === 'change_email'" (click)="set_change()">
+        Submit
+      </button>
+      <button class="button btn-modifier mr-5" [disabled]="password.invalid" *ngIf="change_cred === 'password' " (click)="check_password()">
+        Submit
+      </button>
+      <button class="button btn-modifier" (click)="change_Modal()">
+        Cancel
+      </button>
+    </footer>
+  </div>
+</section>

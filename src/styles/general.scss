@@ -1,0 +1,61 @@
+body {
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+.category-indicator {
+  display: inline-block;
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 50%;
+  position: relative;
+  top: .2rem;
+  margin-left: 0.3rem;
+}
+
+.box.has-header {
+  padding-top: .25rem;
+  .box-header {
+    margin: 0 -1rem 0 -.75rem;
+    strong {
+      filter: brightness(2.5);
+    }
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.display-block {
+  display: inline-block !important;
+}
+
+.no-decoration {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.validation {
+  color : red !important;
+  font-weight: 600;
+  font-size: 0.875em;
+}
+
+.box-margin {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.add-margin {
+  margin-right: 2px;
+  margin-left: 2px;
+}

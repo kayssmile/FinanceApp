@@ -1,0 +1,164 @@
+@media (max-width: $mobile-small) {
+  .section {
+    padding: 0 0;
+  }
+  .column {
+    margin: 0.75em;
+  }
+  .modal-card-title {
+    font-size: 18px;
+  }
+  .scrollable {
+    overflow: scroll;
+    overflow-y: auto;
+  }
+  .dashboard-filter.border-modifier {
+    overflow-x: scroll;
+    scrollbar-color: black white;
+  }
+}
+
+@media (max-width: $mobile) {
+  .modal-card-title {
+    font-size: 18px;
+  }
+  .heading {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: $tablet) {
+  .has-navbar-fixed-top {
+    margin-top: 1rem;
+  }
+  .margin-mobile {
+    margin-left: 15px;
+    font-weight: 600;
+  }
+  .card-content .content {
+    margin-bottom: 0;
+  }
+  section.section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .accounts-margin {
+    margin-top: 3rem;
+  }
+  .home {
+    h1.title.is-1 {
+      font-size: 2rem;
+    }
+    .has-sizes {
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width: $screen-extended) {
+  button.button.filter-toggle {
+    margin-top: -0.2rem;
+    margin-left: 1rem;
+  }
+  .accounts-margin.columns.mb-3 {
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: $screen) {
+  .width {
+    width: 150px;
+  }
+}
+
+@media (min-width: $screen-large) {
+  .is-responsive-18px {
+    font-size: 18px;
+  }
+  .is-responsive-20px {
+    font-size: 20px;
+  }
+  .is-responsive-22px {
+    font-size: 22px;
+  }
+  .is-responsive-24px {
+    font-size: 24px;
+  }
+  .is-responsive-26px {
+    font-size: 26px;
+  }
+  .is-responsive-28px {
+    font-size: 28px;
+  }
+  .accounts-margin.columns.mb-3 {
+    margin-top: 0rem;
+  }
+
+  nav.navbar {
+    .navbar-item {
+      @extend .is-responsive-22px;
+    }
+    .width {
+      width: 250px;
+    }
+  }
+
+  .column {
+    .card-header-title {
+      @extend .is-responsive-22px;
+    }
+    .content p, .content ul li {
+      @extend .is-responsive-20px;
+    }
+    small {
+      @extend .is-responsive-20px;
+    }
+  }
+  .card-header-title {
+    @extend .is-responsive-22px;
+  }
+  .modal {
+    .modal-card-title {
+      @extend .is-responsive-28px;
+    }
+    label {
+      @extend .is-responsive-20px;
+    }
+    button {
+      @extend .is-responsive-18px;
+    }
+  }
+  .dashboard-filter {
+    .modal-card-title {
+      @extend .is-responsive-24px;
+    }
+    th {
+      @extend .is-responsive-20px;
+    }
+    .tag {
+      @extend .is-responsive-18px;
+    }
+  }
+  tr.is-widescreen {
+    td:nth-child(1) {
+      span {
+        @extend .is-responsive-18px;
+      }
+    }
+    td {
+      @extend .is-responsive-22px;
+    }
+  }
+  article.card.categroies {
+    .box.has-header {
+      button.theme-modifier {
+        height: 2rem;
+        width: 2rem;
+        font-size: 18px;
+      }
+    }
+  }
+  .tag.is-medium.mb-2.mr-6.editcsv {
+    @extend .is-responsive-20px;
+  }
+}

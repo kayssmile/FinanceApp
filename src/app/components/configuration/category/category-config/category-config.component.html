@@ -1,0 +1,59 @@
+<section data-cy="CategoryComponent">
+  <div class="is-flex is-justify-content-space-between heading">
+    <h4 class="title is-4">
+      Categories:
+    </h4>
+    <button class="button new-categoryGroup no-decoration" type="button" (click)="createCategoryGroup()" *ngIf='data ==="data"'>+ Create new Category</button>
+  </div>
+
+  <article class="card mt-5" *ngIf='data ==="isloading"'>
+    <div class="has-text-centered">
+      <button class="button is-primary dark is-loading m-6">Loading</button>
+    </div>
+  </article>
+
+  <article class="card mt-5" *ngIf='data ==="nodata"'>
+    <div class="card-content">
+      <p class="title is-flex is-justify-content-space-between">Please create category to start</p>
+      <button class="button new-categoryGroup no-decoration" type="button" (click)="createCategoryGroup()">+ CREATE NEW CATEGORY</button>
+    </div>
+  </article>
+
+  <article class="card categroies" *ngIf='data ==="data"'>
+    <div class="card-content">
+      <div class="columns is-flex-wrap-wrap">
+        <div class="column is-4 categoryGroup" *ngFor="let categoryGroup of categoryGroups">
+          <div class="box has-header" [ngStyle]="{borderColor: categoryGroup.color}">
+            <div class="is-flex is-justify-content-space-between box-header">
+              <strong class="pb-3 is-responsive-20px">{{categoryGroup.name}}</strong>
+              <span>
+                <button class="tag theme-modifier mr-2 no-decoration" type="button" (click)="editCategoryGroup(categoryGroup)">
+                  <span class="icon is-small">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                </button>
+                <button class="tag theme-modifier no-decoration" type="button" (click)="addCategory(categoryGroup)">
+                  <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                </button>
+              </span>
+            </div>
+            <div class="field is-grouped is-grouped-multiline">
+              <ng-container *ngFor="let category of categories">
+                <div class="control category-item" *ngIf="category.group_id === categoryGroup.id">
+                  <div class="tags has-addons">
+                    <span class="tag is-responsive-20px">{{category.name}}</span>
+                    <button class="tag is-delete no-decoration is-responsive-20px" type="button" (click)="deleteCategory(category)"></button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<app-category-form #categoryModal [categoryGroup]="categoryGroupForForm" [categories]="categories" [selector]="selector"></app-category-form>

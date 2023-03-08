@@ -1,0 +1,16 @@
+.csvMask .tag {
+  width: 100%;
+  cursor: pointer;
+  justify-content: space-between;
+
+  &:after {
+    content: 'Edit';
+    opacity: 0;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,159 @@
+$c00: #FFFFFF;
+$c11: #DCDCDC;
+$c12: #CCCCCC;
+$c21: #DEF6FB;
+$c3: #a870ab;
+$c4: #413e9f;
+$c41: #d9e4f8;
+$c5: #041440;
+$c6: #000000;
+
+.light-theme {
+  background-color: $c00;
+  color: $c4;
+  small {
+    color: $c4;
+  }
+  a {
+    color: $c4;
+  }
+  p {
+    color: $c6;
+  }
+  .background {
+    background-color: $c11 !important;
+  }
+  .navbar-item.has-dropdown.is-active {
+    background-color: $c11;
+  }
+  .button {
+    background-color: $c12;
+    border-color: transparent;
+    color: $c4;
+    &.is-static {
+      background-color: $c12;
+    }
+  }
+  .is-success {
+    background-color: $c00;
+  }
+  .theme-modifer {
+    background-color: $c00;
+  }
+  .button.is-small.is-rounded {
+    border: 1px $c00 solid;
+  }
+  .button.is-success:disabled {
+    background-color: $c00;
+    border: none;
+  }
+  .button:hover {
+    background-color: $c11;
+    color: $c4;
+  }
+  .title {
+    color: $c5;
+  }
+  .navbar {
+    background-color: $c12;
+    a,
+    div,
+    h1 {
+      background-color: $c12;
+      color: $c5;
+    }
+    .navbar-dropdown {
+      border-color: $c12;
+    }
+    .navbar-item {
+      background-color: $c12;
+    }
+    .navbar-link:hover {
+      background-color: $c11;
+    }
+    .has-dropdown:hover {
+      background-color: $c11;
+    }
+    a.navbar-item:hover {
+      background-color: $c11;
+      color: $c5;
+    }
+  }
+  .dashboard-filter {
+    background-color: $c41;
+    &.border-modifier {
+      border-top-left-radius : 0px;
+      border-top-right-radius: 0px;
+    }
+    table {
+      background-color: $c41;
+    }
+  }
+  .card {
+    background-color: $c11;
+    .box {
+      background-color: $c00;
+    }
+    .is-transaction:hover {
+      background-color: $c00;
+    }
+  }
+  .modal {
+    .modal-card-head {
+      background-color: $c12;
+    }
+    .modal-card-body {
+      background-color: $c11;
+      .control-modifier {
+        margin-left: 3px;
+        height: 38px;
+        margin-top: 1px;
+      }
+      .color-modifier {
+        outline: none;
+        border: none;
+        box-shadow: none;
+      }
+      .button:hover {
+        background-color: $c12;
+      }
+      .tag.addItem:hover {
+        background-color: $c41;
+      }
+    }
+    .modal-card-foot {
+      background-color: $c12;
+    }
+    .button {
+      background-color: $c00;
+    }
+    .button:hover {
+      background-color: $c11;
+    }
+  }
+  .tag:not(body) {
+    background-color: $c12;
+    text-decoration: none;
+    &:after {
+      color: $c6;
+    }
+    &:before {
+      color: $c6;
+    }
+    &:hover {
+      color: $c4;
+    }
+  }
+  .theme-modifier:hover {
+    background-color: $c11;
+  }
+  .card-footer-item {
+    background-color: $c12;
+  }
+  .card-footer-item:hover {
+    background-color: $c11;
+  }
+  .footer {
+    background-color: $c00;
+  }
+}

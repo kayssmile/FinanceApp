@@ -1,0 +1,33 @@
+<section data-cy="CsvComponent">
+  <div class="is-flex is-justify-content-space-between heading">
+    <h4 class="title is-4">
+      Csv:
+    </h4>
+    <button class="button new-csvMask no-decoration" type="button" (click)="createCsv()" *ngIf='data ==="data"'>+ Create new CsvMask</button>
+  </div>
+
+  <article class="card mt-5" *ngIf='data ==="isloading"'>
+    <div class="has-text-centered">
+      <button class="button is-primary dark is-loading m-6">Loading</button>
+    </div>
+  </article>
+
+  <article class="card mt-5" *ngIf='data ==="nodata"'>
+    <div class="card-content">
+      <p class="title">Please add csv to start</p>
+      <button class="button new-csvMask no-decoration" type="button" (click)="createCsv()">+ Create new csvMask</button>
+    </div>
+  </article>
+
+  <article class="card" *ngIf='data ==="data"'>
+    <div class="card-content">
+      <div class="field is-grouped is-grouped-multiline">
+        <div class="control csvMask" *ngFor="let csvMask of csvMasks" >
+            <span class="tag is-medium mb-2 mr-6 editcsv" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<app-csv-form #csvModal [csv]="csvForForm" [selector]="selector"></app-csv-form>

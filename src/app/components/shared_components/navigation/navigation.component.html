@@ -1,0 +1,51 @@
+<nav class="navbar is-fixed-top" id="nav-menu" role="navigation" aria-label="main navigation" >
+  <div class="navbar-brand is-flex is-align-items-center">
+    <h1 class="navbar-item is-size-3 mr-4">
+      Finance App
+    </h1>
+    <a role="button" class="navbar-burger no-decoration mr-2 mt-1" #hamburgerBtn aria-label="menu" aria-expanded="false" (click)="expandBurgerMenu($event)">
+      <span (click)="expandBurgerMenu($event)"></span>
+      <span (click)="expandBurgerMenu($event)"></span>
+      <span (click)="expandBurgerMenu($event)"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu no-decoration" id="navbarMobile" #navMenu>
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="/home" (click)="expandBurgerMenu($event)" routerLinkActive="active">
+        Home
+      </a>
+      <a class="navbar-item" routerLink="/dashboard" (click)="expandBurgerMenu($event)" routerLinkActive="active">
+        Dashboard
+      </a>
+      <a class="navbar-item" routerLink="/configuration" (click)="expandBurgerMenu($event)" routerLinkActive="active">
+        Configuration
+      </a>
+    </div>
+
+    <div class="navbar-end mr-6">
+      <a class="navbar-item" routerLink="/manual" (click)="expandBurgerMenu($event)" routerLinkActive="active">
+        Manual
+      </a>
+      <a class="navbar-item" (click)="logout()">
+        Logout
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable width">
+        <div class="navbar-link" data-cy="theme_content" #theme_select>
+          Choose Style
+        </div>
+        <div class="navbar-dropdown" #dropdown (mouseover)="change_color()" (mouseout)="change_color()">
+          <a class="navbar-item" (click)="set_theme('light-theme')">
+            Light Theme
+          </a>
+          <a class="navbar-item" (click)="set_theme('dark-theme')">
+            Dark Theme
+          </a>
+          <a class="navbar-item" (click)="set_theme('color-theme')">
+            Color Theme
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
