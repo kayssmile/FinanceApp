@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
   }
 
   async regristration() {
-    if(this.register.valid) {
+    if (this.register.valid) {
       this.registerButton.nativeElement.classList.add('is-loading')
       let user = {email : this.email_register.value, password : this.password_register.value}
       if (await this.AuthService.new_user(user)) {

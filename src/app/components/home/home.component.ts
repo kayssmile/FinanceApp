@@ -42,6 +42,16 @@ export class HomeComponent {
     })
   }
 
+  async delete_account() {
+    if(await this.AuthService.delete_user()) {
+      this.AuthService.logout()
+    }
+  }
+
+  safety_check() {
+    this.change_cred = 'delete'
+  }
+
   change_Modal() {
     this.modal.nativeElement.classList.toggle('is-active')
     this.change_cred = 'select'

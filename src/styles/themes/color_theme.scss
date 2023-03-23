@@ -48,6 +48,9 @@ $c5: #041440;
     button.new-csvMask.button {
       border: 1px black solid;
     }
+    button.bordered.button {
+      border: 1px black solid;
+    }
   }
   .card-footer-item {
     background-color: $c0;
@@ -134,7 +137,6 @@ $c5: #041440;
       color: $c4;
     }
   }
-
   .dashboard-filter {
     background-color: $c2;
     &.border-modifier {
@@ -148,9 +150,9 @@ $c5: #041440;
       color: $c5
     }
   }
-
   button.filter-toggle {
     color: $c3;
     border-color: $c3;
   }
+
 }

@@ -4,7 +4,7 @@ import { StorageService } from '../../model/storage.service';
 import { User } from '../types/user';
 import { User as FirebaseUser } from "firebase/auth";
 import { Router } from '@angular/router';
-import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import { DBService } from './db.service';
 
 @Injectable({providedIn: 'root'})
@@ -91,6 +91,20 @@ export class AuthentificationService {
     }
     return false
   }
+
+  async delete_user() : Promise<boolean> {
+    await this.db_Service.delete_Userdb()
+    try {
+      await deleteUser(this.auth.currentUser!)
+      return true
+    }catch(e)  {
+      return false
+    }
+    return false
+  }
+
+
+
 
  /*
 Function isLoggedin(), ist nicht sicher (Security) wurde fürs Testing so belassen.

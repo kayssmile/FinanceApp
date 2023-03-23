@@ -71,8 +71,11 @@ $c6: #000000;
     .navbar-link:hover {
       background-color: $c11;
     }
-    .has-dropdown:hover {
+    .navbar-item.has-dropdown:hover {
       background-color: $c11;
+      .navbar-link {
+        background-color: $c11;
+      }
     }
     a.navbar-item:hover {
       background-color: $c11;

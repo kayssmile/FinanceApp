@@ -20,8 +20,7 @@ import { UploadService } from './shared/services/upload.service';
     AppComponent,
     LoginComponent,
     ManualComponent,
-    HomeComponent,
-
+    HomeComponent
   ],
   imports: [
     BrowserModule,

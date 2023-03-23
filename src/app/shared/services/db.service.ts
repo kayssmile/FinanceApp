@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, getAuth, updateEmail, updatePassword } from '@angular/fire/auth';
-import { addDoc, collection, doc, Firestore, getDoc, getDocs } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs } from '@angular/fire/firestore';
 import { Account } from '../types/account';
 import { Category, CategoryGroup } from '../types/category';
 
@@ -26,5 +26,11 @@ export class DBService {
     const db_id = { User : this.auth.currentUser?.uid }
     await addDoc((collection(this.firestore, 'Database')),db_id)
   }
+
+  async delete_Userdb() {
+    const db_id = { User : this.auth.currentUser?.uid }
+    await deleteDoc(doc(this.firestore, "Database", this.auth.currentUser!.uid))
+  }
+
 
 }
